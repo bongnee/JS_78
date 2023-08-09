@@ -63,36 +63,37 @@ function sapXepTang() {
     getEle("txtSapXep").innerHTML = numArray;
 }
 getEle("btnSapXep").onclick = sapXepTang;
-
-function kiemTraNguyenTo(n) {
-    Boolean flag = true;
-    if (n < 2) {
-        flag = false;
-    } else if( n == 2){
-        flag = true;
-    }else{
-    for(var i = 0 ; i < Math.sqrt(n); i++)
-    if(n % i == 0){
-        flag = false
-    }
-}
-    return flag;
-   
-
-}
 function timNguyenTo() {
     var nguyenTo = [];
-    for(  i = 0; i <= numArray.length; i ++)
-    if(kiemTraNguyenTo(i)){
-     nguyenTo = numArray[i];  
-      break     
+    for(var i = 0; i <=numArray.length; i++){
+        if(numArray[i]==2){
+            nguyenTo = numArray[i];
+            break
+        }else if(numArray[i] >= 2){
+            for( var n = 2, r = 0; r <= Math.sqrt((numArray[i])); r++){
+                if (numArray[i] % n != 0) {
+                    nguyenTo = numArray[i];
+                }
+            }
+           break 
+        }
     }
-    if (ketLuan = true) {
-        getEle("txtNguyenTo").innerHTML = " Số nguyên tố đầu tiên là: " + nguyenTo;
-    }else{
-        getEle("txtNguyenTo").innerHTML = "Không có số nguyên tố"
-    }
+    getEle("txtNguyenTo").innerHTML = "số nguyên tố: " + nguyenTo;
+    console.log(nguyenTo)
 }
 getEle("btnNguyenTo").onclick = timNguyenTo;
+function demSoNguyen() {
+    for(var n = 0, i = 0; i <= numArray.length;i++)
+    Number.isInteger(numArray[i]) && n ++;
+getEle("txtSoNguyen").innerHTML = "Tổng số nguyên: " + n;
+}
+getEle("btnSoNguyen").onclick = demSoNguyen;
 
- 
+function soSanh() {
+    for(var n = 0, i = 0; i <= numArray.length;i++)
+    numArray[i] > 0 && n++;
+    for(var r = 0, i = 0; i <= numArray.length; i++)
+    numArray[i] < 0 && r++;
+    getEle("txtSoSanh").innerHTML = n > r ? "Số dương > số âm" : "Số dương < số âm";
+}
+getEle("btnSoSanh").onclick = soSanh;
